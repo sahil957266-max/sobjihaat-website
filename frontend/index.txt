@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobji Haat - Fresh Vegetables</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main App (Home Page) -->
+    <div class="main-app">
+        <header>
+            <nav>
+                <a href="#" class="nav-home" id="homeButton" onmousedown="startHomePress()" onmouseup="endHomePress()" ontouchstart="startHomePress()" ontouchend="endHomePress()">HOME</a>
+                <a href="#" class="nav-about" onclick="showAboutPage()">ABOUT US</a>
+            </nav>
+        </header>
+        
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.1.0&auto=format&fit=crop&w=800&q=80" alt="Fresh Vegetables">
+            </div>
+            <!-- DYNAMIC OFFER BANNER - WILL UPDATE WHEN ADMIN CHANGES SETTINGS -->
+            <div class="offer-banner" id="offerBanner">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <!-- CASHBACK BANNER -->
+            <div class="cashback-offer">
+                🎉 GET 5% CASHBACK! Review us on Google Maps when we reach to you for delivery & pay 5% less on your total order amount!
+            </div>
+            <div class="features-slider">
+                <div class="slider-content">
+                    <!-- Feature slider content -->
+                </div>
+            </div>
+            <div class="icons-container">
+                <i class="icon whatsapp fab fa-whatsapp" onclick="openWhatsApp()"></i>
+                <i class="icon facebook fab fa-facebook" onclick="openFacebook()"></i>
+                <i class="icon instagram fab fa-instagram" onclick="openInstagram()"></i>
+                <i class="icon review fas fa-star" onclick="openGoogleReview()"></i>
+                <i class="icon cart fas fa-shopping-cart" onclick="openCart()"></i>
+            </div>
+        </div>
+      
+        <!-- SERVICES SECTION -->
+        <div class="services-section">
+            <h3 class="services-title">Our Special Services</h3>
+            <p class="services-subtitle">Click any service to contact owner directly via WhatsApp</p>
+            
+            <div class="services-container-wrapper">
+                <button class="services-nav prev" onclick="slideServices('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="services-container" id="servicesContainer">
+                    <div class="service-card" onclick="openServiceWhatsApp('Restaurant Orders')">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Restaurant Orders" class="service-image">
+                        <div class="service-name">Restaurant Orders</div>
+                    </div>
+                    <div class="service-card" onclick="openServiceWhatsApp('Catering Orders')">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Catering Orders" class="service-image">
+                        <div class="service-name">Catering Orders</div>
+                    </div>
+                    <div class="service-card" onclick="openServiceWhatsApp('Special Occasions')">
+                        <img src="https://cdn.pixabay.com/photo/2023/11/03/16/19/celebration-8363367_1280.jpg" alt="Special Occasions" class="service-image">
+                        <div class="service-name">Special Occasions</div>
+                    </div>
+                    <div class="service-card" onclick="openServiceWhatsApp('Bulk Orders')">
+                        <img src="https://plus.unsplash.com/premium_photo-1686529896385-8a8d581d0225?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJ1bGslMjBvcmRlciUyMHZlZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="Bulk Orders" class="service-image">
+                        <div class="service-name">Bulk Orders</div>
+                    </div>
+                     
+                    <div class="service-card" onclick="openServiceWhatsApp('Restaurant Orders')">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Restaurant Orders" class="service-image">
+                        <div class="service-name">Restaurant Orders</div>
+                    </div>
+                    <div class="service-card" onclick="openServiceWhatsApp('Catering Orders')">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Catering Orders" class="service-image">
+                        <div class="service-name">Catering Orders</div>
+                    </div>
+                  
+                </div>
+                
+                <button class="services-nav next" onclick="slideServices('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="services-dots" id="servicesDots">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+        </div>
+
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search products..." id="searchInput">
+            <i class="search-icon fas fa-search" id="searchIcon"></i>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-images">
+                <div class="category-image active" data-category="indian" onclick="loadCategory('indian')">
+                    <img src="https://www.authenticindiatours.com/app/uploads/2024/10/Indian-Vegetables-1400-collage-1400x550-c-default.jpg" alt="Indian Vegetables">
+                </div>
+                <div class="category-image" data-category="exotic" onclick="loadCategory('exotic')">
+                    <img src="https://www.allthatgrows.in/cdn/shop/articles/Feat_image-Exotic.png?v=1654490717" alt="Exotic Vegetables">
+                </div>
+                <div class="category-image" data-category="leafy" onclick="loadCategory('leafy')">
+                    <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Leafy Vegetables">
+                </div>
+                <div class="category-image" data-category="others" onclick="loadCategory('others')">
+                    <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2024/05/how-to-make-paneer-recipe.webp" alt="Other Products">
+                </div>
+            </div>
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="indian" onclick="loadCategory('indian')">Indian</button>
+                <button class="category-btn" data-category="exotic" onclick="loadCategory('exotic')">Exotic</button>
+                <button class="category-btn" data-category="leafy" onclick="loadCategory('leafy')">Leafy</button>
+                <button class="category-btn" data-category="others" onclick="loadCategory('others')">Others</button>
+            </div>
+        </div>
+       
+        <div class="products-container" id="productsContainer">
+            <!-- Products will be loaded here dynamically -->
+        </div>
+        
+        <div class="mission-image">
+            <img src="https://images.unsplash.com/photo-1556909114-4d0d853e5e25?ixlib=rb-4.1.0&auto=format&fit=crop&w=800&q=80" alt="Our Mission">
+        </div>
+        
+        <button class="sticky-cart-btn" onclick="openCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        
+        <!-- CUSTOMER REVIEWS SECTION -->
+        <section class="reviews-section">
+            <h2 class="review-title">💚 What Our Customers Say</h2>
+
+            <div class="review-container" id="reviewContainer">
+                <!-- Review Cards -->
+                <div class="review-card">
+                    <p>"Best place to buy fresh vegetables — quality is always top-notch!"</p>
+                    <h4>— Arjun</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Timely delivery every morning! The bulk orders are handled very professionally."</p>
+                    <h4>— Suman</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Fresh vegetables every morning! SobjiHaat has made my home cooking so much easier."</p>
+                    <h4>— Anjali Das</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Amazing freshness and great pricing — SobjiHaat has made my daily shopping easy!"</p>
+                    <h4>— Neha Sharma</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Reliable and honest service. Vegetables are always clean and well packed."</p>
+                    <h4>— Rajesh Kumar</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"As a restaurant owner, I save both time and money. Highly recommend SobjiHaat!"</p>
+                    <h4>— Priya Singh</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                </div>
+            </div>
+
+            <div class="review-stats">
+                <div class="counter">
+                    <span id="happyCount">0</span>+
+                    <p>Happy Customers</p>
+                </div>
+                <button class="review-btn" onclick="openGoogleReview()">
+                    ⭐ Leave a Google Review 
+                </button>
+            </div>
+            
+            <!-- ADDED CASHBACK NOTE IN REVIEWS SECTION -->
+            <div class="cashback-note">
+                <strong>🎁 Special Offer:</strong> Show us your Google Maps review when receiving your order and get <span class="cashback-highlight">5% CASHBACK</span> instantly! Pay 5% less than your billing amount.
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Sabjihaat. All rights reserved.</p>
+            <p> Jadavpur Sandhya Bazar Rd,West Bengal  kolkata-700075</p>
+            <p>Phone: +919051410591 | WhatsApp: +919051410591</p>
+        </footer>
+    </div>
+    
+    <!-- About Us Page -->
+    <div class="about-page" id="aboutPage">
+        <div class="about-header">
+            <h1 class="about-title">About Sobji Haat</h1>
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="About Sobji Haat" class="about-image">
+        </div>
+        
+        <div class="about-content">
+            <p>Welcome to Sobji Haat, your trusted partner for fresh, high-quality vegetables delivered right to your doorstep. Established in 2020, we've been serving the Kolkata community with the freshest produce sourced directly from local farmers.</p>
+            
+            <p>Our mission is simple: to provide fresh, healthy, and affordable vegetables while supporting local agriculture and reducing food waste. We believe that everyone deserves access to quality produce, and we're committed to making that a reality.</p>
+            
+            <h3>Why Choose Sobji Haat?</h3>
+            <div class="about-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="feature-title">Farm Fresh</div>
+                    <p>Direct from farms to your kitchen</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="feature-title">Fast Delivery</div>
+                    <p>Next day morning delivery available</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="feature-title">Best Prices</div>
+                    <p>Competitive pricing guaranteed</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="feature-title">Quality Assured</div>
+                    <p>Rigorous quality checks</p>
+                </div>
+            </div>
+            
+            <h3>Our Story</h3>
+            <p>Sobji Haat began as a small family business with a simple vision: to bridge the gap between local farmers and urban consumers. What started as a single vegetable cart has now grown into a trusted online platform serving hundreds of customers daily.</p>
+            
+            <!-- ADDED CASHBACK OFFER IN ABOUT PAGE -->
+            <div class="cashback-note" style="margin-top: 20px;">
+                <strong>🎉 Special Promotion:</strong> Review us on Google Maps and get <span class="cashback-highlight">5% CASHBACK</span> on your order! Show your review when receiving delivery and pay 5% less.
+            </div>
+        </div>
+        
+        <button class="back-to-home" onclick="showHomePage()">Back to Home</button>
+    </div>
+    
+    <!-- Admin Login Modal -->
+    <div class="admin-login-modal" id="adminLoginModal">
+        <div class="admin-login-content">
+            <h2 class="admin-login-title">Admin Login</h2>
+            <form class="admin-login-form" id="adminLoginForm">
+                <input type="text" class="admin-login-input" id="adminUsername" placeholder="Username" required>
+                <input type="password" class="admin-login-input" id="adminPassword" placeholder="Password" required>
+                <button type="submit" class="admin-login-btn">Login</button>
+            </form>
+            <button class="admin-back-home" onclick="closeAdminLogin()">Back to Home</button>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h1 class="admin-title">Admin Panel</h1>
+            <p>Manage your store efficiently</p>
+        </div>
+        
+        <div class="admin-dashboard" id="adminDashboard">
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('products')">Products</button>
+                <button class="admin-tab" onclick="switchAdminTab('settings')">Settings</button>
+                <button class="admin-tab" onclick="switchAdminTab('pincodes')">Pincodes</button>
+                <button class="admin-tab" onclick="switchAdminTab('stock')">Stock Management</button>
+            </div>
+            
+            <div class="admin-tab-content active" id="productsTab">
+                <div class="admin-search">
+                    <input type="text" id="adminProductSearch" placeholder="Search products..." oninput="filterAdminProducts()">
+                </div>
+                <div class="category-filter">
+                    <select id="adminCategoryFilter" onchange="filterAdminProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="indian">Indian</option>
+                        <option value="exotic">Exotic</option>
+                        <option value="leafy">Leafy</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="product-list" id="adminProductList">
+                    <!-- Admin product list will be loaded here -->
+                </div>
+                <button class="admin-btn save-btn" onclick="showAddProductForm()">Add New Product</button>
+                
+                <div class="add-product-form hidden" id="addProductForm">
+                    <h4>Add New Product</h4>
+                    <div class="form-row">
+                        <input type="text" id="newProductName" placeholder="Product Name">
+                        <input type="number" id="newProductPrice" placeholder="Price">
+                    </div>
+                    <div class="form-row">
+                        <select id="newProductCategory">
+                            <option value="indian">Indian</option>
+                            <option value="exotic">Exotic</option>
+                            <option value="leafy">Leafy</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <select id="newProductUnit">
+                            <option value="kg">kg</option>
+                            <option value="piece">piece</option>
+                            <option value="bunch">bunch</option>
+                            <option value="packet">packet</option>
+                            <option value="tin">tin</option>
+                            <option value="bottle">bottle</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="newProductStock" placeholder="Stock Quantity" value="10">
+                    </div>
+                    <div class="file-upload-container">
+                        <label for="newProductImageUpload" class="file-upload-label">
+                            <i class="fas fa-upload"></i> Upload Product Image
+                        </label>
+                        <input type="file" id="newProductImageUpload" class="file-upload-input" accept="image/*" onchange="handleImageUpload(this, 'newProductImage')">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="newProductImage" placeholder="Or enter image URL">
+                    </div>
+                    <div class="form-row">
+                        <button class="admin-btn save-btn" onclick="addNewProduct()">Save Product</button>
+                        <button class="admin-btn cancel-btn" onclick="hideAddProductForm()">Cancel</button>
+                    </div>
+                </div>
+                
+                <!-- Edit Product Form -->
+                <div class="edit-product-form hidden" id="editProductForm">
+                    <h4>Edit Product</h4>
+                    <div class="form-row">
+                        <input type="text" id="editProductName" placeholder="Product Name">
+                        <input type="number" id="editProductPrice" placeholder="Price">
+                    </div>
+                    <div class="form-row">
+                        <select id="editProductCategory">
+                            <option value="indian">Indian</option>
+                            <option value="exotic">Exotic</option>
+                            <option value="leafy">Leafy</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <select id="editProductUnit">
+                            <option value="kg">kg</option>
+                            <option value="piece">piece</option>
+                            <option value="bunch">bunch</option>
+                            <option value="packet">packet</option>
+                            <option value="tin">tin</option>
+                            <option value="bottle">bottle</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="editProductStock" placeholder="Stock Quantity">
+                    </div>
+                    <div class="file-upload-container">
+                        <label for="editProductImageUpload" class="file-upload-label">
+                            <i class="fas fa-upload"></i> Upload New Product Image
+                        </label>
+                        <input type="file" id="editProductImageUpload" class="file-upload-input" accept="image/*" onchange="handleImageUpload(this, 'editProductImage')">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="editProductImage" placeholder="Or enter image URL">
+                    </div>
+                    <div class="form-row">
+                        <button class="admin-btn save-btn" onclick="updateProduct()">Update Product</button>
+                        <button class="admin-btn cancel-btn" onclick="hideEditProductForm()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-tab-content" id="settingsTab">
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalProducts">0</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalOrders">0</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                </div>
+                
+                <h4>Delivery Settings</h4>
+                <div class="form-group">
+                    <label>Default Delivery Charge (₹)</label>
+                    <input type="number" id="deliveryCharge" value="20">
+                </div>
+                <div class="form-group">
+                    <label>Free Delivery Minimum (₹)</label>
+                    <input type="number" id="freeDeliveryMin" value="999">
+                </div>
+                <button class="admin-btn save-btn" onclick="saveSettings()">Save Settings</button>
+            </div>
+            
+            <div class="admin-tab-content" id="pincodesTab">
+                <h4>Pincode Management</h4>
+                <div class="form-group">
+                    <label>Add New Pincode</label>
+                    <div class="form-row">
+                        <input type="text" id="newPincode" placeholder="Pincode" maxlength="6">
+                        <input type="number" id="newPincodeCharge" placeholder="Delivery Charge">
+                        <button class="admin-btn save-btn" onclick="addPincode()">Add</button>
+                    </div>
+                </div>
+                
+                <div class="pincode-management">
+                    <h5>Service Pincodes</h5>
+                    <div id="pincodeList">
+                        <!-- Pincodes will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-tab-content" id="stockTab">
+                <h4>Stock Management</h4>
+                <div class="admin-search">
+                    <input type="text" id="stockSearch" placeholder="Search products..." oninput="filterStockProducts()">
+                </div>
+                <div class="category-filter">
+                    <select id="stockCategoryFilter" onchange="filterStockProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="indian">Indian</option>
+                        <option value="exotic">Exotic</option>
+                        <option value="leafy">Leafy</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="stock-management">
+                    <div id="stockList">
+                        <!-- Stock items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="admin-btn logout-btn" onclick="adminLogout()" style="background: #e74c3c; margin-top: 20px; width: 100%;">Logout</button>
+        <button class="back-to-home" onclick="showHomePage()">Back to Home</button>
+    </div>
+    
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Cart</h2>
+                <button class="close-cart" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+         
+            <div class="cart-total" id="cartTotal">
+                Total: ₹0
+            </div>
+            
+            <!-- ADDED CASHBACK NOTE IN CART -->
+            <div class="cashback-note">
+                <strong>💰Do this to avail above<span class="cashback-highlight"> 5% CASHBACK OFFER : </span> </strong> Review us on Google Maps when we reach to you for delivery & pay 5% less on your total order amount!
+            </div>
+            
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkBusinessHours()">
+                Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+    
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Checkout</h2>
+                <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number *</label>
+                    <input type="tel" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Delivery Address *</label>
+                    <textarea id="customerAddress" rows="3" required></textarea>
+                    <div class="location-options">
+                        <button type="button" class="location-btn" onclick="getCurrentLocation()">
+                            <i class="fas fa-location-arrow"></i> Use My Location
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode *</label>
+                    <input type="text" id="pincode" required maxlength="6">
+                </div>
+                
+                <div class="billing-details" id="billingSummary">
+                    <!-- Billing summary will be loaded here -->
+                </div>
+                
+                <!-- ADDED CASHBACK NOTE IN CHECKOUT -->
+                <div class="cashback-note">
+                    <strong>🎁 Don't forget!</strong> Show us your Google Maps review when receiving order to get <span class="cashback-highlight">5% INSTANT CASHBACK</span>. You'll pay 5% less than the total amount shown above.
+                </div>
+                
+                <button type="button" class="checkout-btn" onclick="validateAndCheckout()">
+                    Confirm Order via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Business Hours Modal -->
+    <div class="modal" id="businessHoursModal">
+        <div class="modal-content business-hours-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Shop Closed</h2>
+                <button class="close-modal" onclick="closeBusinessHoursModal()">&times;</button>
+            </div>
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="business-hours-image">
+            <div class="hours-details">
+                <div class="hours-title">Our Business Hours</div>
+                <div class="hours-description">
+                    We're currently closed. Please place your orders between 9:00 AM and 10:00 PM.
+                </div>
+                <!-- ADDED CASHBACK OFFER IN BUSINESS HOURS MODAL -->
+                <div class="cashback-note" style="margin: 10px 0;">
+                    <strong>Special Offer:</strong> Review us on Google Maps and get <span class="cashback-highlight">5% CASHBACK</span> on your next order!
+                </div>
+                <div class="hours-actions">
+                    <button class="hours-btn hours-primary" onclick="closeBusinessHoursModal()">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

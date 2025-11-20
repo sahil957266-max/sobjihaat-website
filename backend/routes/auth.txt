@@ -1,0 +1,62 @@
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin');
+
+// Admin login
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Find admin
+    const admin = await Admin.findOne({ username });
+    if (!admin) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Check password
+    const isValidPassword = await bcrypt.compare(password, admin.password);
+    if (!isValidPassword) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: admin._id, username: admin.username },
+      process.env.JWT_SECRET || 'sobjihaat_jwt_secret_2025_secure_key',
+      { expiresIn: '24h' }
+    );
+
+    res.json({
+      token,
+      admin: {
+        id: admin._id,
+        username: admin.username
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// Verify token
+router.post('/verify', async (req, res) => {
+  try {
+    const token = req.body.token;
+    if (!token) {
+      return res.status(401).json({ valid: false });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET || 'sobjihaat_jwt_secret_2025_secure_key', (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ valid: false });
+      }
+      res.json({ valid: true, admin: decoded });
+    });
+  } catch (error) {
+    res.status(401).json({ valid: false });
+  }
+});
+
+module.exports = router;
